@@ -16,6 +16,7 @@ const ToDo = ({
       className="todo"
       style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
     >
+      <div className="flex flex-col gap-1 w-3/4">
       {editingIndex === index ? (
         <input
           type="text"
@@ -27,8 +28,8 @@ const ToDo = ({
       ) : (
         <strong>{todo.text}</strong>
       )}
-      <br />
       {todo.description}
+      </div>
       {editingIndex === index ? (
         <div>
           <button onClick={() => saveToDo(todo, newText)}>Save</button>
