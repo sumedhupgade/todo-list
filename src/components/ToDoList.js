@@ -2,7 +2,6 @@ import React, { useState, useReducer } from "react";
 import ToDo from "./ToDo";
 
 const reducer = (state, action) => {
-  console.log("state", state, "action", action);
   switch (action.type) {
     case "ADD_TODO":
       return [
@@ -26,24 +25,9 @@ const reducer = (state, action) => {
   }
 };
 
-const ToDoList = () => {
-  const [todos, dispatch] = useReducer(reducer, [
-    {
-      text: "Learn React",
-      description: "Read React documentation",
-      isCompleted: false,
-    },
-    {
-      text: "Build a ToDo App",
-      description: "Create a simple to-do list app",
-      isCompleted: false,
-    },
-    {
-      text: "Master React",
-      description: "Practice with advanced concepts",
-      isCompleted: false,
-    },
-  ]);
+const ToDoList = ({ todosList }) => {
+  console.log(todosList);
+  const [todos, dispatch] = useReducer(reducer, todosList);
 
   const [editingIndex, setEditingIndex] = useState(null);
 
@@ -66,20 +50,7 @@ const ToDoList = () => {
   };
 
   return (
-    <div className="todo-list">
-      {todos.map((todo, index) => (
-        <ToDo
-          key={index}
-          todo={todo}
-          index={index}
-          removeToDo={removeToDo}
-          completeToDo={completeToDo}
-          setEditing={setEditingIndex}
-          editingIndex={editingIndex}
-          saveToDo={EditToDo}
-        />
-      ))}
-
+    <div className="todo-list pt-4 w-full flex flex-col gap-3 items-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -90,11 +61,41 @@ const ToDoList = () => {
           e.target.elements.addToDo.value = "";
           e.target.elements.addDescription.value = "";
         }}
+        className="flex w-2/3 gap-2 flex-wrap justify-center"
       >
-        <input type="text" name="addToDo" />
-        <input type="text" name="addDescription" placeholder="Description" />
-        <button type="submit">Add ToDo</button>
+        <input
+          type="text"
+          className="block w-1/3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Todo"
+          name="addToDo"
+        />
+        <input
+          type="text"
+          className="block w-1/3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          name="addDescription"
+          placeholder="Description"
+        />
+        <button
+          type="submit"
+          className="flex w-auto justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-auto"
+        >
+          Add ToDo
+        </button>
       </form>
+      <div className="card w-auto">
+        {todos.map((todo, index) => (
+          <ToDo
+            key={index}
+            todo={todo}
+            index={index}
+            removeToDo={removeToDo}
+            completeToDo={completeToDo}
+            setEditing={setEditingIndex}
+            editingIndex={editingIndex}
+            saveToDo={EditToDo}
+          />
+        ))}
+      </div>
     </div>
   );
 };
