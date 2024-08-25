@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({setUser}) => {
+const Signup = ({ setUser }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -117,12 +117,14 @@ const Signup = ({setUser}) => {
                 Create
               </button>
             </div>
+
+            {error}
           </form>
 
           <p className="mt-5 text-center text-sm text-gray-500">
             Already have an account?
             <a
-              href="/login"
+              href="/"
               className="font-semibold leading-6 ms-1 text-indigo-600 hover:text-indigo-500"
             >
               Login
