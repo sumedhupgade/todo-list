@@ -10,7 +10,7 @@ const Header = ({setUser}) => {
       auth.signOut().then((resp)=>{
         setUser(null);
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/");
       });
     } catch (error) {}
   };

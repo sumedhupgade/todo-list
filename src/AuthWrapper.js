@@ -11,7 +11,7 @@ const AuthWrapper = ({ children, requiresAuth }) => {
   if (loading) return <div className="page-loader">Loading...</div>;
   if (requiresAuth && !user) {
     // If the route requires authentication and the user is not logged in, redirect to login
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   } else if (!requiresAuth && user) {
     // If the route does not require authentication and the user is logged in, redirect to dashboard
     return <Navigate to="/dashboard" />;

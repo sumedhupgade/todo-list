@@ -1,5 +1,4 @@
 import "./App.css";
-import ToDoList from "./components/ToDoList";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
@@ -24,7 +23,7 @@ function App() {
       {user && <Header setUser={setUser} />}
       <Routes>
         <Route
-          path="/login"
+          path="/"
           element={
             <AuthWrapper requiresAuth={false}>
               <Login setUser={setUser} />
