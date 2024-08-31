@@ -24,8 +24,11 @@ const Signup = ({ setUser }) => {
         auth,
         formData.email,
         formData.password
-      );
-      navigate("/dashboard");
+      ).then((response)=>{
+        setUser(response.user)
+        navigate("/dashboard");
+
+      })
     } catch (err) {
       setError("Failed to create an account. Please try again.");
     }
